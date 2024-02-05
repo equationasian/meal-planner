@@ -1,0 +1,44 @@
+#nav-container {
+    background-color: white;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px lightgrey;
+    position: sticky;
+    top: 0;
+    width: 100vw;
+}
+
+#logo-placeholder {
+    margin-left: 15px;
+}
+
+#nav-link-container {
+    padding: 0;
+    display: flex;
+    column-gap: 50px;
+}
+
+.nav-link {
+    list-style: none;
+}
+
+.btn {
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+#signin-btn {
+    margin-right: 30px;
+    border-style: solid;
+    border-color: #FF9B9B;
+    background-color: white;
+    color: #FF9B9B;
+}
+
+#signin-btn:hover {
+    background-color: #fff0f0;
+    cursor: pointer;
+}
