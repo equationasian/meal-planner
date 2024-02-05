@@ -1,9 +1,12 @@
 import './App.css';
+import Nav from "./Nav.js";
+import Recipe from './Recipe.js';
 
-function App() {
+export default function App() {
   return (
-    <div className='something'></div>
+    <div className="app-container">
+      <Nav />
+      <Recipe />
+    </div>
   );
 }
-
-export default App;
