@@ -2,12 +2,32 @@ import "./Recipe.css";
 import Loading from "./Loading.js";
 import { useState, useEffect } from "react";
 
-function LinkHistory() {
-
+function LinkHistory({ recipeName }) {
+    return (
+        <div className="link-history-container">
+            <ul className="link-history-list">
+                <li key="meal-planner" className="history-link">
+                    Meal Planner
+                </li>
+                <li key="first-arrow" className="arrow">&gt;</li>
+                <li key="recipes" className="history-link">
+                    Recipes
+                </li>
+                <li key="second-arrow" className="arrow">&gt;</li>
+                <li key={recipeName} className="history-link">
+                    {recipeName}
+                </li>
+            </ul>
+        </div>
+    );
 }
 
 function Thumbnail({ imgURL, altText }) {
-    return <img id="thumbnail" src={imgURL} alt={altText}></img>;
+    return (
+        <div className="thumbnail-container">
+            <img id="thumbnail" src={imgURL} alt={altText}></img>;
+        </div>
+    );
 }
 
 function RecipeName({ name }) {
@@ -33,7 +53,7 @@ function Ingredients({ ingredientsArray }) {
         <div className="ingredients-container">
             <h2 className="heading">Ingredients</h2>
             <ul className="ingredients-list">
-                {ingredientsArray.map(obj => (
+                {ingredientsArray.map((obj, index) => (
                     <li key={obj.ingredient} className="ingredient-item">
                         <div className="ingredient-thumbnail-container">
                             <img src={obj.imageURL} alt={obj.ingredient} className="ingredient-thumbnail"></img>
@@ -54,7 +74,7 @@ function Instructions({ instructionsArray }) {
         <div className="instructions-container">
             <h2 className="heading">Instructions</h2>
             <ol className="instructions-list">
-                {instructionsArray.split("\r\n").map(item => (
+                {instructionsArray.split(/[\r\n]+/).map(item => (
                     <li key={item} className="instruction">{item}</li>
                 ))}
             </ol>
@@ -67,7 +87,7 @@ export default function Recipe() {
     useEffect(() => {
         getRecipe()
             .then(data => setRecipeInfo(data[0]))
-            .catch(error => console.error(`Error: ${error}`));
+            .catch(error => console.error(error));
     }, []);
 
     function readIngredients() {
@@ -100,12 +120,11 @@ export default function Recipe() {
 
     return (
         <div className="recipe-container">
-            <div className="thumbnail-container">
-                <Thumbnail 
-                    imgURL={recipeInfo.strMealThumb} 
-                    alt={recipeInfo.strMeal} 
-                />
-            </div>
+            <LinkHistory recipeName={recipeInfo.strMeal} />
+            <Thumbnail 
+                imgURL={recipeInfo.strMealThumb} 
+                alt={recipeInfo.strMeal} 
+            />
             <div className="recipe-text-container">
                 <RecipeName name={recipeInfo.strMeal} />
                 <Tags 
@@ -123,7 +142,7 @@ export default function Recipe() {
 
 async function getRecipe() {
     try {
-        const response = await fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata");
+        const response = await fetch("https://www.themealdb.com/api/json/v1/1/random.php");
 
         if (!response.ok) {
             throw new Error(`HTTP error: ${response.status}`);
