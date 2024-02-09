@@ -18,6 +18,15 @@
     column-gap: 10px;
 }
 
+.history-link {
+    text-decoration: none;
+    color: #FF6868;
+}
+
+.history-link:hover {
+    color: #ff9696;
+}
+
 .arrow {
     font-weight: bold;
 }

@@ -12,6 +12,8 @@
 
 #logo-placeholder {
     margin-left: 15px;
+    text-decoration: none;
+    color: #FF9B9B;
 }
 
 #nav-link-container {
@@ -22,6 +24,18 @@
 
 .nav-link {
     list-style: none;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s ease;
+}
+
+.link:hover {
+    border-bottom: 2px solid #FF9B9B;
 }
 
 .btn {
