@@ -1,4 +1,4 @@
-import "./Loading.css";
+import "./css/Loading.css";
 import { useState } from "react";
 
 function Sticker() {

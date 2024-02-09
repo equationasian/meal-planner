@@ -1,20 +1,20 @@
-import "./Recipe.css";
-import Loading from "./Loading.js";
-import { useState, useEffect } from "react";
+import "./css/Recipe.css";
+import Loading from "./Loading.jsx";
+import { Link, useLoaderData } from "react-router-dom";
 
 function LinkHistory({ recipeName }) {
     return (
         <div className="link-history-container">
             <ul className="link-history-list">
-                <li key="meal-planner" className="history-link">
-                    Meal Planner
+                <li key="meal-planner">
+                    <Link to="/" className="history-link">Meal Planner</Link>
                 </li>
                 <li key="first-arrow" className="arrow">&gt;</li>
-                <li key="recipes" className="history-link">
-                    Recipes
+                <li key="recipes">
+                    <Link to="/recipes" className="history-link">Recipes</Link>
                 </li>
                 <li key="second-arrow" className="arrow">&gt;</li>
-                <li key={recipeName} className="history-link">
+                <li key={recipeName}>
                     {recipeName}
                 </li>
             </ul>
@@ -83,12 +83,10 @@ function Instructions({ instructionsArray }) {
 }
 
 export default function Recipe() {
-    const [recipeInfo, setRecipeInfo] = useState(null);
-    useEffect(() => {
-        getRecipe()
-            .then(data => setRecipeInfo(data[0]))
-            .catch(error => console.error(error));
-    }, []);
+    const recipeInfo = useLoaderData()["meals"][0];
+    if (!recipeInfo) {
+        return <Loading />;
+    }
 
     function readIngredients() {
         let ingredientArray = [];
@@ -114,10 +112,6 @@ export default function Recipe() {
         return ingredientArray;
     }
 
-    if (!recipeInfo) {
-        return <Loading />;
-    }
-
     return (
         <div className="recipe-container">
             <LinkHistory recipeName={recipeInfo.strMeal} />
@@ -138,20 +132,4 @@ export default function Recipe() {
             </div>
         </div>
     );
-}
-
-async function getRecipe() {
-    try {
-        const response = await fetch("https://www.themealdb.com/api/json/v1/1/random.php");
-
-        if (!response.ok) {
-            throw new Error(`HTTP error: ${response.status}`);
-        }
-
-        const data = await response.json();
-        return data["meals"];
-    }
-    catch (error) {
-        console.error(`Error message: ${error}`);
-    }
 }
