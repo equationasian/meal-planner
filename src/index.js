@@ -4,9 +4,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import './css/index.css';
 import App from './App';
 import Recipe from './Recipe';
-import Search, { searchLoader } from "./Search";
+import Search from "./Search";
 import Home from './Home';
 import NotFound from './NotFound';
+import * as fetchRecipe from "./fetchRecipe.js";
 
 const router = createBrowserRouter([
   {
@@ -19,17 +20,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/recipes",
-        loader: searchLoader,
-        element: <Search />
+        loader: fetchRecipe.searchTagsLoader,
+        element: <Search />,
       },
       {
         path: "/recipes/:recipeName",
-        loader: async ({ params }) => {
-          return fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${params.recipeName}`)
-        },
+        loader: fetchRecipe.recipePageLoader,
         errorElement: <NotFound />,
         element: <Recipe />
-      }
+      },
     ],
   },
 ]);

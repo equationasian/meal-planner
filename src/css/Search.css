@@ -11,6 +11,10 @@
     border: 1px solid;
 }
 
+.tags-container {
+    overflow: hidden;
+}
+
 .small-heading {
     font-weight: 400;
     font-size: 32px;
@@ -30,12 +34,16 @@
     padding: 0;
     display: flex;
     column-gap: 10px;
+    overflow: scroll;
+    scrollbar-width: none;
 }
 
 .search-tag {
     color: #FF6868;
     border: 1px solid #FF6868;
     border-radius: 40px;
+    white-space: nowrap;
+    background-color: white;
     padding: 15px;
 }
 
@@ -46,4 +54,13 @@
 
 .search-arrow {
     padding: 15px 10px;
+}
+
+.recipes-list {
+    list-style: none;
+    padding: 0;
+}
+
+.recipes-list > li + li {
+    margin-top: 50px;
 }

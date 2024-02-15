@@ -1,0 +1,29 @@
+.preview-link {
+    text-decoration: none;
+    color: black;
+}
+
+.preview-container {
+    display: flex;
+    column-gap: 10px;
+    border: 1px solid lightgrey;
+}
+
+.preview-thumbnail-container {
+    height: 250px;
+    width: auto;
+    overflow: hidden;
+}
+
+#preview-thumbnail {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+}
+
+.preview-info {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}

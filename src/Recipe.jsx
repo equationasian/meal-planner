@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "./css/Recipe.css";
 import Loading from "./Loading.jsx";
 import { Link, useLoaderData } from "react-router-dom";
@@ -84,6 +85,10 @@ function Instructions({ instructionsArray }) {
 
 export default function Recipe() {
     const recipeInfo = useLoaderData()["meals"][0];
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     if (!recipeInfo) {
         return <Loading />;
     }
